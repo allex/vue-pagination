@@ -1,0 +1,48 @@
+{
+  "name": "@vue/pagination",
+  "version": "1.0.0",
+  "description": "A pagination based on VUE.",
+  "main": "src/index.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "http://git.analysys.cn/fss-modules/vue-pagination"
+  },
+  "keywords": [
+  ],
+  "dependencies": {
+    "vue": "^2.4.2"
+  },
+  "devDependencies": {
+    "@fedor/standard": "latest",
+    "@fedor/progress-webpack-plugin": "^1.0.0",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.5.2",
+    "cross-env": "^5.0.5",
+    "css-loader": "^0.28.4",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "file-loader": "^0.11.2",
+    "html-webpack-plugin": "^2.30.1",
+    "resolve-url-loader": "^2.1.0",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2",
+    "vue-loader": "^13.0.4",
+    "vue-template-compiler": "^2.4.2",
+    "env-parse": "^1.0.5",
+    "webpack": "^3.5.4",
+    "webpack-dev-server": "^2.7.1",
+    "webpack-merge": "^4.1.0"
+  },
+  "scripts": {
+    "dev": "npm test && cross-env NODE_ENV=development webpack-dev-server --config ./.build/webpack.config.dev.js --hot",
+    "build": "npm test && cross-env NODE_ENV=production webpack --config ./.build/webpack.config.prod.js",
+    "lint": "standard \"**/*.{js,vue}\"",
+    "lint:fix": "standard \"**/*.{js,vue}\" --fix",
+    "test": "npm run lint",
+    "publish": "npm run build",
+    "start": "npm run dev"
+  }
+}
