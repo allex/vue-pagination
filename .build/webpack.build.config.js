@@ -51,8 +51,8 @@ function generateConfig (filename, options) {
   return merge(baseConfig, config)
 }
 
-const config = ['index'].map((key) => {
-  return generateConfig(key, { exportName: 'VueButton' })
+const config = ['index','index.min'].map((key) => {
+  return generateConfig(key, { exportName: 'VuePagination' })
 })
 
 module.exports = config

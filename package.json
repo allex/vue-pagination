@@ -2,7 +2,7 @@
   "name": "@vue/pagination",
   "version": "1.0.0",
   "description": "A pagination based on VUE.",
-  "main": "src/index.js",
+  "main": "src/index.min.js",
   "license": "MIT",
   "repository": {
     "type": "git",
