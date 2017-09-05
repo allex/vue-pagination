@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <v-page :total="22" :current="6" show-elevator></v-page>
+    <v-page :total="22" :current="6" show-elevator></v-page>  
     </br>
     </br>
     </br>
