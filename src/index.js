@@ -1,5 +1,5 @@
 'use strict'
 
-import vTooltip from './Tooltip.vue';
+import vPage from './Page.vue'
 
-export default vTooltip
+export default vPage
