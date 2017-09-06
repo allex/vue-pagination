@@ -1,9 +1,5 @@
 'use strict'
 
-let vButton = require('./Button.vue')
-let vButtonGroup = require('./ButtonGroup.vue')
+import vTooltip from './Tooltip.vue';
 
-module.exports = {
-  vButton,
-  vButtonGroup
-}
+export default vTooltip
