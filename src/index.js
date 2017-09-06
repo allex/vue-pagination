@@ -1,9 +1,5 @@
 'use strict'
 
-let vButton = require('./Button.vue')
-let vButtonGroup = require('./ButtonGroup.vue')
+import vPage from './Page.vue'
 
-module.exports = {
-  vButton,
-  vButtonGroup
-}
+export default vPage

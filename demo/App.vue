@@ -30,6 +30,7 @@
 <script>
 
   import vPage from '@/Page.vue'
+  
   export default {
     data: function () {
       return {
