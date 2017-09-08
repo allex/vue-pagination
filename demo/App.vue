@@ -1,26 +1,26 @@
 <template>
   <div class="">
-    <v-page :total="22" :current="6" show-elevator></v-page>  
+    <v-page :total="22" :current="6" show-elevator :i18n="{jump:'Jump',page:'Page',total:'PageCount',prev:'Prev',next:'Next'}"></v-page>  
     </br>
     </br>
     </br>
-    <v-page :total="22" :current="6" show-sizer></v-page>
+    <v-page :total="22" :current="6" show-sizer :i18n="{jump:'跳至',page:'页',total:'总页数',prev:'上一页',next:'下一页'}"></v-page>
     </br>
     </br>
     </br>
-    <v-page :total="22" :current="1" show-total></v-page>
+    <v-page :total="22" :current="1" show-total :i18n="{jump:'跳至',page:'页',total:'总页数',prev:'上一页',next:'下一页'}"></v-page>
     </br>
     </br>
     </br>
-    <v-page :total="22" :current="1"></v-page>
+    <v-page :total="22" :current="1" :i18n="{jump:'跳至',page:'页',total:'总页数',prev:'上一页',next:'下一页'}"></v-page>
     </br>
     </br>
     </br>
-    <v-page :total="22" :current="1" simple></v-page>
+    <v-page :total="22" :current="1" simple :i18n="{jump:'跳至',page:'页',total:'总页数',prev:'上一页',next:'下一页'}"></v-page>
+    </br> 
     </br>
-    </br>
-    </br>
-    <v-page :total="22" :current="1" simple show-sizer></v-page>
+    </br>  
+    <v-page :total="22" :current="1" simple show-sizer :i18n="{jump:'Jump',page:'Page',total:'PageCount',prev:'Prev',next:'Next'}"></v-page>
     </br>
     </br>
     </br>

@@ -1,24 +1,25 @@
 <template>
   <ul class="v-page" v-if="!simple">
     <li class="v-page-item v-page-text">
-      <span>共 {{totalPage}} 条</span>
+      <span>{{i18n.total + ' / ' + totalPage}}</span>
     </li>
-    <li class="v-page-item v-page-prev" @click="previousPage()" :class="currentPage == 1 ? 'v-page-disabled' : ''">
+    <li class="v-page-item v-page-prev" @click="previousPage()" :class="currentPage == 1 ? 'v-page-disabled' : ''" :title="i18n.prev">
       <a><i class="fa fa-angle-left"></i></a>
     </li>
     <li 
       class="v-page-item" 
       v-for="(item,index) in pageArr" 
+      :title="item"
       :class="currentPage == item ? 'v-page-item-active' : ''"
       @click="ckPages(item,index)">
       <a>{{item}}</a>
     </li>
-    <li class="v-page-item v-page-next" @click="nextPage()" :class="currentPage == totalPage ? 'v-page-disabled' : ''">
+    <li class="v-page-item v-page-next" @click="nextPage()" :class="currentPage == totalPage ? 'v-page-disabled' : ''" :title="i18n.next">
       <a><i class="fa fa-angle-right"></i></a>
     </li>
 
     <li class="v-page-item v-page-text" v-if="showSizer || showElevator">
-      <span>跳至</span>
+      <span>{{i18n.jump}}</span>
     </li>
     <li class="v-page-item v-page-label" v-if="showSizer || showElevator">
       <label>
@@ -32,28 +33,29 @@
       </label>
     </li>
     <li class="v-page-item v-page-text" v-if="showSizer || showElevator">
-      <span>页</span>
+      <span>{{i18n.page}}</span>
     </li>
   </ul>
   <ul v-else class="v-simple">
     <li class="v-page-simple-item v-page-text">
-      <span>共 {{totalPage}} 条</span>
+      <span></span>
     </li>
-    <li class="v-page-simple-item v-page-prev" @click="previousPage()" :class="currentPage == 1 ? 'v-page-disabled' : ''">
+    <li class="v-page-simple-item v-page-prev" @click="previousPage()" :class="currentPage == 1 ? 'v-page-disabled' : ''" :title="i18n.prev">
       <a><i class="fa fa-angle-left"></i></a>
     </li>
     <li 
       class="v-page-simple-item" 
       v-for="(item,index) in pageArr" 
       :class="currentPage == item ? 'v-page-simple-item-active' : ''"
+      :title="item"
       @click="ckPages(item,index)">
       <a>{{item}}</a>
     </li>
-    <li class="v-page-simple-item v-page-next" @click="nextPage()" :class="currentPage == totalPage ? 'v-page-disabled' : ''">
+    <li class="v-page-simple-item v-page-next" @click="nextPage()" :class="currentPage == totalPage ? 'v-page-disabled' : ''" :title="i18n.next">
       <a><i class="fa fa-angle-right"></i></a>
     </li>
     <li class="v-page-simple-item v-page-text" v-if="showSizer">
-      <span>跳至</span>
+      <span>{{i18n.jump}}</span>
     </li>
     <li class="v-page-simple-item v-page-label" v-if="showSizer">
       <label>
@@ -67,12 +69,14 @@
       </label>
     </li>
     <li class="v-page-simple-item v-page-text" v-if="showSizer">
-      <span>页</span>
+      <span>{{i18n.page}}</span>
     </li>
   </ul>
 </template>
 
 <script>
+  import { oneOf } from './util/assist';
+
   export default {
     name: 'Page',
     data() {
@@ -83,6 +87,16 @@
       }
     },
     props: {
+      i18n:{
+        type:Object,
+        default: {
+            jump:'跳至',
+            page:'页',
+            total:'总页数',
+            prev:'上一页',
+            next:'下一页'
+        }
+      },
       total:{
         type: Number
       },
@@ -258,6 +272,9 @@
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
+
+  @import "./theme.scss";
+  
   .v-page-item {
     display: inline-block;
     vertical-align: middle;
@@ -278,13 +295,13 @@
     border-radius: 4px;
     transition: border .2s ease-in-out,color .2s ease-in-out;
     a {
-      font-size:12px;
-      color:#495060;
+      font-size:$font-primary-size;
+      color:$font-primary-color;
     }
     &:hover {
-      border-color: #2d8cf0;
+      border-color: $color-primary-blue-active;
       a {
-        color: #2d8cf0;
+        color: $color-primary-blue-active;
       }
     }
   }
@@ -305,8 +322,8 @@
   .v-page-text {
     border:0;
     span {
-      font-size:12px;
-      color:#495060;
+      font-size:$font-primary-size;
+      color:$font-primary-color;
     }
   }
 
@@ -318,7 +335,7 @@
       }
       .fa-angle-double-right,.fa-angle-double-left {
         display: none;
-        color:#2d8cf0;
+        color:$color-primary-blue-active;
       }
     }
     &:hover {
@@ -343,15 +360,15 @@
         border:0;
         outline:none;
         padding:0 8px;
-        font-size:12px;
-        color:#495060;
+        font-size:$font-primary-size;
+        color:$font-primary-color;
       }
     }
   }
 
   .v-page-item-active {
-    background-color: #2d8cf0;
-    border-color: #2d8cf0;
+    background-color: $color-primary-blue-active;
+    border-color: $color-primary-blue-active;
     a,&:hover a {
       color:#fff;
     }
@@ -389,17 +406,17 @@
     border-radius: 4px;
     transition: border .2s ease-in-out,color .2s ease-in-out;
     a {
-      font-size:12px;
-      color:#495060;
+      font-size:$font-primary-size;
+      color:$font-primary-color;
     }
     &:hover {
-      border-color: #2d8cf0;
+      border-color: $color-primary-blue-active;
       a {
-        color: #2d8cf0;
+        color: $color-primary-blue-active;
       }
     }
     &.v-page-simple-item-active {
-      background-color:#2d8cf0;
+      background-color:$color-primary-blue-active;
       a {
         color:#fff;
       }
