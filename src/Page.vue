@@ -6,9 +6,9 @@
     <li class="v-page-item v-page-prev" @click="previousPage()" :class="currentPage == 1 ? 'v-page-disabled' : ''" :title="i18n.prev">
       <a><i class="fa fa-angle-left"></i></a>
     </li>
-    <li 
-      class="v-page-item" 
-      v-for="(item,index) in pageArr" 
+    <li
+      class="v-page-item"
+      v-for="(item,index) in pageArr"
       :title="item"
       :class="currentPage == item ? 'v-page-item-active' : ''"
       @click="ckPages(item,index)">
@@ -23,9 +23,9 @@
     </li>
     <li class="v-page-item v-page-label" v-if="showSizer || showElevator">
       <label>
-        <input 
-          type="text" 
-          name="" 
+        <input
+          type="text"
+          name=""
           :value="currentPage"
           @keydown="keyDown"
           @keyup="keyUp"
@@ -43,9 +43,9 @@
     <li class="v-page-simple-item v-page-prev" @click="previousPage()" :class="currentPage == 1 ? 'v-page-disabled' : ''" :title="i18n.prev">
       <a><i class="fa fa-angle-left"></i></a>
     </li>
-    <li 
-      class="v-page-simple-item" 
-      v-for="(item,index) in pageArr" 
+    <li
+      class="v-page-simple-item"
+      v-for="(item,index) in pageArr"
       :class="currentPage == item ? 'v-page-simple-item-active' : ''"
       :title="item"
       @click="ckPages(item,index)">
@@ -59,9 +59,9 @@
     </li>
     <li class="v-page-simple-item v-page-label" v-if="showSizer">
       <label>
-        <input 
-          type="text" 
-          name="" 
+        <input
+          type="text"
+          name=""
           :value="currentPage"
           @keydown="keyDown"
           @keyup="keyUp"
@@ -75,8 +75,6 @@
 </template>
 
 <script>
-  import { oneOf } from './util/assist';
-
   export default {
     name: 'Page',
     data() {
@@ -162,7 +160,7 @@
             }
             if (!this.simple && !this.showTotal){
               page.push('...');
-              page[page.length] = allpage;  
+              page[page.length] = allpage;
             }
           } else if (pageindex >= allpage - 3) {
             if (!this.simple && !this.showTotal){
@@ -204,7 +202,7 @@
             this.currentPage = index == 1 ? (this.currentPage - 5) : (this.currentPage + 5);
           }else{
             if (index == 1) {
-              this.currentPage = 1; 
+              this.currentPage = 1;
             }else{
               this.currentPage = this.totalPage;
             }
@@ -274,7 +272,7 @@
 <style lang="scss" rel="stylesheet/scss">
 
   @import "./theme.scss";
-  
+
   .v-page-item {
     display: inline-block;
     vertical-align: middle;
@@ -305,7 +303,7 @@
       }
     }
   }
-  
+
   .v-page-next,
   .v-page-prev {
     a {
