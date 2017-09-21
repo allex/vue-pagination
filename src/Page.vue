@@ -17,7 +17,7 @@
     <li class="v-page-item v-page-next" @click="nextPage()" :class="currentPage == totalPage ? 'v-page-disabled' : ''" :title="i18n.next">
       <a><i class="fa fa-angle-right"></i></a>
     </li>
-
+  
     <li class="v-page-item v-page-text" v-if="showSizer || showElevator">
       <span>{{i18n.jump}}</span>
     </li>
@@ -83,20 +83,15 @@
       return {
         pageArr:[],
         currentPage: this.current,
-        totalPage:this.total
+        totalPage:this.total,
+        i18n:{}
       }
     },
     props: {
-      i18n:{
+      i18np:{
         type:Object,
         default(){
-          return {
-              jump:'跳至',
-              page:'页',
-              total:'总页数',
-              prev:'上一页',
-              next:'下一页'
-          }
+          return {}
         }
       },
       total:{
@@ -145,6 +140,14 @@
         }
         this.totalPage = val;
         this.rtPageArr(this.currentPage,this.totalPage);
+      },
+      current(){
+        this.rtPageArr(1,this.totalPage)
+        this.currentPage = 1;
+      },
+      totalPage(val){
+        this.rtPageArr(1,this.totalPage)
+        this.currentPage = 1;
       }
     },
     methods: {
@@ -271,6 +274,11 @@
     },
     mounted(){
       this.rtPageArr(this.currentPage,this.totalPage);
+      if (JSON.stringify(this.i18np) == '{}') {
+        this.i18n = {jump:'跳至',page:'页',total:'总页数',prev:'上一页',next:'下一页'}
+      }else{
+        this.i18n = this.i18np;
+      }
     }
   }
 </script>

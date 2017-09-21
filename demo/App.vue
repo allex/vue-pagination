@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <v-page :total="22" :current="6" show-elevator :i18n="{jump:'Jump',page:'Page',total:'PageCount',prev:'Prev',next:'Next'}" @page="page"></v-page>  
+    <v-page :total="100" :current="current" show-elevator @page="page"></v-page>  
     </br>
     </br>
     </br>
@@ -34,7 +34,7 @@
   export default {
     data: function () {
       return {
-        
+        current:9
       }
     },
     props:{
@@ -42,10 +42,15 @@
     },
     methods:{
         page(obj){
-            console.log(obj)
+            
         }
     },
-    components: {vPage}
+    components: {vPage},
+    mounted(){
+        setTimeout(()=>{
+            this.current = 10
+        },2000)
+    }
   }
 </script>
 
