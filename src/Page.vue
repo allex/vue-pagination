@@ -89,12 +89,14 @@
     props: {
       i18n:{
         type:Object,
-        default: {
-            jump:'跳至',
-            page:'页',
-            total:'总页数',
-            prev:'上一页',
-            next:'下一页'
+        default(){
+          return {
+              jump:'跳至',
+              page:'页',
+              total:'总页数',
+              prev:'上一页',
+              next:'下一页'
+          }
         }
       },
       total:{

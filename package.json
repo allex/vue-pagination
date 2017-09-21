@@ -1,6 +1,6 @@
 {
   "name": "@vue/pagination",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "A pagination based on VUE.",
   "main": "dist/index.min.js",
   "repository": {
