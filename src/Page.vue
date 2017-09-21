@@ -186,6 +186,9 @@
         }
         this.pageArr = [];
         this.pageArr = page;
+        this.$emit('page',{
+          current:this.currentPage
+        })
       },
       /**
        * 点击分页
@@ -248,7 +251,6 @@
       keyUp (e) {
         const key = e.keyCode;
         const val = parseInt(e.target.value);
-        console.log(val)
         if (key == 13) {
           let page = 1;
           if (val > this.totalPage) {

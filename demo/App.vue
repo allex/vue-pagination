@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <v-page :total="22" :current="6" show-elevator :i18n="{jump:'Jump',page:'Page',total:'PageCount',prev:'Prev',next:'Next'}"></v-page>  
+    <v-page :total="22" :current="6" show-elevator :i18n="{jump:'Jump',page:'Page',total:'PageCount',prev:'Prev',next:'Next'}" @page="page"></v-page>  
     </br>
     </br>
     </br>
@@ -39,6 +39,11 @@
     },
     props:{
       
+    },
+    methods:{
+        page(obj){
+            console.log(obj)
+        }
     },
     components: {vPage}
   }
