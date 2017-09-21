@@ -143,7 +143,7 @@
         this.rtPageArr(1,this.totalPage)
         this.currentPage = 1;
       },
-      totalPage(val){
+      total(){
         this.rtPageArr(1,this.totalPage)
         this.currentPage = 1;
       }
@@ -191,6 +191,10 @@
         }
         this.pageArr = [];
         this.pageArr = page;
+        this.totalPage = null;
+        this.currentPage = null;
+        this.totalPage = allpage
+        this.currentPage = pageindex
         this.$emit('page',{
           current:this.currentPage
         })
