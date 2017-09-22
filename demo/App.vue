@@ -43,13 +43,13 @@
     },
     methods:{
         page(obj){
-            //alert(11)
+           console.log(obj)
         }
     },
     components: {vPage},
     mounted(){
         setTimeout(()=>{
-            //this.current = 6
+            this.current = 5
             this.total = 100
         },2000)
     }

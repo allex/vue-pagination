@@ -139,13 +139,13 @@
         this.totalPage = val;
         this.rtPageArr(this.currentPage,this.totalPage);
       },
-      current(){
-        this.rtPageArr(1,this.totalPage)
-        this.currentPage = 1;
+      current(newVal,oldVal){
+        this.currentPage = newVal
+        this.rtPageArr(this.currentPage,this.totalPage)
       },
-      total(){
-        this.rtPageArr(1,this.totalPage)
-        this.currentPage = 1;
+      total(newVal,oldVal){
+        this.totalPage = newVal
+        this.rtPageArr(this.currentPage,newVal)
       }
     },
     methods: {
@@ -191,13 +191,6 @@
         }
         this.pageArr = [];
         this.pageArr = page;
-        this.totalPage = null;
-        this.currentPage = null;
-        this.totalPage = allpage
-        this.currentPage = pageindex
-        this.$emit('page',{
-          current:this.currentPage
-        })
       },
       /**
        * 点击分页
@@ -233,6 +226,9 @@
           }
           this.rtPageArr(this.currentPage,this.totalPage);
         }
+        this.$emit('page',{
+          current:this.currentPage
+        })
       },
       /**
        * 上一页
@@ -241,6 +237,9 @@
         if (this.currentPage == 1) return;
         this.currentPage = this.currentPage - 1;
         this.rtPageArr(this.currentPage,this.totalPage);
+        this.$emit('page',{
+          current:this.currentPage
+        })
       },
       /**
        * 下一页
@@ -249,6 +248,9 @@
         if (this.currentPage == this.totalPage) return;
         this.currentPage = this.currentPage + 1;
         this.rtPageArr(this.currentPage,this.totalPage);
+        this.$emit('page',{
+          current:this.currentPage
+        })
       },
       keyDown (e) {
           const key = e.keyCode;
