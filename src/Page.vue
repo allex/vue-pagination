@@ -132,20 +132,16 @@
       /**
        * 监听当前页数值变化
        */
-      total (val) {
-        if (val > this.totalPage) {
+      total (newVal,oldVal) {
+        if (newVal > this.totalPage) {
           this.currentPage = 1;
         }
-        this.totalPage = val;
-        this.rtPageArr(this.currentPage,this.totalPage);
+        this.totalPage = newVal
+        this.rtPageArr(this.currentPage,this.totalPage)
       },
       current(newVal,oldVal){
         this.currentPage = newVal
         this.rtPageArr(this.currentPage,this.totalPage)
-      },
-      total(newVal,oldVal){
-        this.totalPage = newVal
-        this.rtPageArr(this.currentPage,newVal)
       }
     },
     methods: {
