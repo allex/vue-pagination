@@ -1,9 +1,9 @@
 <template>
   <ul class="v-page" v-if="!simple">
     <li class="v-page-item v-page-text">
-      <span>{{i18n.total + ' / ' + totalPage}}</span>
+      <span>{{i18np.total + ' / ' + totalPage}}</span>
     </li>
-    <li class="v-page-item v-page-prev" @click="previousPage()" :class="currentPage == 1 ? 'v-page-disabled' : ''" :title="i18n.prev">
+    <li class="v-page-item v-page-prev" @click="previousPage()" :class="currentPage == 1 ? 'v-page-disabled' : ''" :title="i18np.prev">
       <a><i class="fa fa-angle-left"></i></a>
     </li>
     <li
@@ -14,12 +14,12 @@
       @click="ckPages(item,index)">
       <a>{{item}}</a>
     </li>
-    <li class="v-page-item v-page-next" @click="nextPage()" :class="currentPage == totalPage ? 'v-page-disabled' : ''" :title="i18n.next">
+    <li class="v-page-item v-page-next" @click="nextPage()" :class="currentPage == totalPage ? 'v-page-disabled' : ''" :title="i18np.next">
       <a><i class="fa fa-angle-right"></i></a>
     </li>
   
     <li class="v-page-item v-page-text" v-if="showSizer || showElevator">
-      <span>{{i18n.jump}}</span>
+      <span>{{i18np.jump}}</span>
     </li>
     <li class="v-page-item v-page-label" v-if="showSizer || showElevator">
       <label>
@@ -33,14 +33,14 @@
       </label>
     </li>
     <li class="v-page-item v-page-text" v-if="showSizer || showElevator">
-      <span>{{i18n.page}}</span>
+      <span>{{i18np.page}}</span>
     </li>
   </ul>
   <ul v-else class="v-simple">
     <li class="v-page-simple-item v-page-text">
       <span></span>
     </li>
-    <li class="v-page-simple-item v-page-prev" @click="previousPage()" :class="currentPage == 1 ? 'v-page-disabled' : ''" :title="i18n.prev">
+    <li class="v-page-simple-item v-page-prev" @click="previousPage()" :class="currentPage == 1 ? 'v-page-disabled' : ''" :title="i18np.prev">
       <a><i class="fa fa-angle-left"></i></a>
     </li>
     <li
@@ -51,11 +51,11 @@
       @click="ckPages(item,index)">
       <a>{{item}}</a>
     </li>
-    <li class="v-page-simple-item v-page-next" @click="nextPage()" :class="currentPage == totalPage ? 'v-page-disabled' : ''" :title="i18n.next">
+    <li class="v-page-simple-item v-page-next" @click="nextPage()" :class="currentPage == totalPage ? 'v-page-disabled' : ''" :title="i18np.next">
       <a><i class="fa fa-angle-right"></i></a>
     </li>
     <li class="v-page-simple-item v-page-text" v-if="showSizer">
-      <span>{{i18n.jump}}</span>
+      <span>{{i18np.jump}}</span>
     </li>
     <li class="v-page-simple-item v-page-label" v-if="showSizer">
       <label>
@@ -69,7 +69,7 @@
       </label>
     </li>
     <li class="v-page-simple-item v-page-text" v-if="showSizer">
-      <span>{{i18n.page}}</span>
+      <span>{{i18np.page}}</span>
     </li>
   </ul>
 </template>
@@ -82,11 +82,11 @@
         pageArr:[],
         currentPage: this.current,
         totalPage:this.total,
-        i18n:{}
+        i18np:{}
       }
     },
     props: {
-      i18np:{
+      i18n:{
         type:Object,
         default(){
           return {}
@@ -269,15 +269,18 @@
           }
           this.currentPage = page;
           this.rtPageArr(this.currentPage,this.totalPage);
+          this.$emit('page',{
+            current:this.currentPage
+          })
         }
       }
     },
     mounted(){
       this.rtPageArr(this.currentPage,this.totalPage);
-      if (JSON.stringify(this.i18np) == '{}') {
-        this.i18n = {jump:'跳至',page:'页',total:'总页数',prev:'上一页',next:'下一页'}
+      if (JSON.stringify(this.i18n) == '{}') {
+        this.i18np = {jump:'跳至',page:'页',total:'总页数',prev:'上一页',next:'下一页'}
       }else{
-        this.i18n = this.i18np;
+        this.i18np = this.i18n;
       }
     }
   }
@@ -306,6 +309,7 @@
     border: 1px solid #dddee1;
     border-radius: 4px;
     transition: border .2s ease-in-out,color .2s ease-in-out;
+    padding:0 6px;
     a {
       font-size:$font-primary-size;
       color:$font-primary-color;
@@ -366,14 +370,15 @@
     margin-right: 0px;
     label {
       input {
-        width: 34px;
+        width: 36px;
         height: 26px;
         line-height: 26px;
         border:0;
         outline:none;
-        padding:0 8px;
+        padding:0 4px;
         font-size:$font-primary-size;
         color:$font-primary-color;
+        text-align: center;
       }
     }
   }

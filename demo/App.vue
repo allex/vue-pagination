@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <v-page :total="total" :current="current" show-elevator @page="page"></v-page>  
+    <v-page :total="total" :current="current" show-elevator @page="page" :i18n="{jump:'Jump',page:'Page',total:'PageCount',prev:'Prev',next:'Next'}"></v-page>  
     </br>
     </br>
     </br>
@@ -35,7 +35,7 @@
     data: function () {
       return {
         current:9,
-        total:200
+        total:100000
       }
     },
     props:{
@@ -49,8 +49,8 @@
     components: {vPage},
     mounted(){
         setTimeout(()=>{
-            this.current = 5
-            this.total = 100
+            this.current = 500
+            this.total = 999999
         },2000)
     }
   }
