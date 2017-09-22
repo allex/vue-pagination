@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "http://git.analysys.cn/fss-modules/@vue/pagination"
+    "url": "http://git.analysys.cn/fss-modules/vue-pagination"
   },
   "keywords": [
     "vue",
