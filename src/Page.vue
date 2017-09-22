@@ -1,9 +1,9 @@
 <template>
   <ul class="v-page" v-if="!simple">
     <li class="v-page-item v-page-text">
-      <span>{{i18np.total + ' / ' + totalPage}}</span>
+      <span>{{i18n.total + ' / ' + totalPage}}</span>
     </li>
-    <li class="v-page-item v-page-prev" @click="previousPage()" :class="currentPage == 1 ? 'v-page-disabled' : ''" :title="i18np.prev">
+    <li class="v-page-item v-page-prev" @click="previousPage()" :class="currentPage == 1 ? 'v-page-disabled' : ''" :title="i18n.prev">
       <a><i class="fa fa-angle-left"></i></a>
     </li>
     <li
@@ -14,12 +14,12 @@
       @click="ckPages(item,index)">
       <a>{{item}}</a>
     </li>
-    <li class="v-page-item v-page-next" @click="nextPage()" :class="currentPage == totalPage ? 'v-page-disabled' : ''" :title="i18np.next">
+    <li class="v-page-item v-page-next" @click="nextPage()" :class="currentPage == totalPage ? 'v-page-disabled' : ''" :title="i18n.next">
       <a><i class="fa fa-angle-right"></i></a>
     </li>
-  
+
     <li class="v-page-item v-page-text" v-if="showSizer || showElevator">
-      <span>{{i18np.jump}}</span>
+      <span>{{i18n.jump}}</span>
     </li>
     <li class="v-page-item v-page-label" v-if="showSizer || showElevator">
       <label>
@@ -33,14 +33,14 @@
       </label>
     </li>
     <li class="v-page-item v-page-text" v-if="showSizer || showElevator">
-      <span>{{i18np.page}}</span>
+      <span>{{i18n.page}}</span>
     </li>
   </ul>
   <ul v-else class="v-simple">
     <li class="v-page-simple-item v-page-text">
       <span></span>
     </li>
-    <li class="v-page-simple-item v-page-prev" @click="previousPage()" :class="currentPage == 1 ? 'v-page-disabled' : ''" :title="i18np.prev">
+    <li class="v-page-simple-item v-page-prev" @click="previousPage()" :class="currentPage == 1 ? 'v-page-disabled' : ''" :title="i18n.prev">
       <a><i class="fa fa-angle-left"></i></a>
     </li>
     <li
@@ -51,11 +51,11 @@
       @click="ckPages(item,index)">
       <a>{{item}}</a>
     </li>
-    <li class="v-page-simple-item v-page-next" @click="nextPage()" :class="currentPage == totalPage ? 'v-page-disabled' : ''" :title="i18np.next">
+    <li class="v-page-simple-item v-page-next" @click="nextPage()" :class="currentPage == totalPage ? 'v-page-disabled' : ''" :title="i18n.next">
       <a><i class="fa fa-angle-right"></i></a>
     </li>
     <li class="v-page-simple-item v-page-text" v-if="showSizer">
-      <span>{{i18np.jump}}</span>
+      <span>{{i18n.jump}}</span>
     </li>
     <li class="v-page-simple-item v-page-label" v-if="showSizer">
       <label>
@@ -69,7 +69,7 @@
       </label>
     </li>
     <li class="v-page-simple-item v-page-text" v-if="showSizer">
-      <span>{{i18np.page}}</span>
+      <span>{{i18n.page}}</span>
     </li>
   </ul>
 </template>
@@ -77,22 +77,27 @@
 <script>
   export default {
     name: 'Page',
-    data() {
+    data () {
       return {
-        pageArr:[],
+        pageArr: [],
         currentPage: this.current,
-        totalPage:this.total,
-        i18np:{}
+        totalPage: this.total
       }
     },
     props: {
-      i18n:{
-        type:Object,
-        default(){
-          return {}
+      i18n: {
+        type: Object,
+        default () {
+          return {
+            jump: '跳至',
+            page: '页',
+            total: '总页数',
+            prev: '上一页',
+            next: '下一页'
+          }
         }
       },
-      total:{
+      total: {
         type: Number
       },
       current: {
@@ -128,160 +133,155 @@
         default: false
       }
     },
-    watch:{
+    watch: {
       /**
        * 监听当前页数值变化
        */
-      total (newVal,oldVal) {
+      total (newVal, oldVal) {
         if (newVal > this.totalPage) {
-          this.currentPage = 1;
+          this.currentPage = 1
         }
         this.totalPage = newVal
-        this.rtPageArr(this.currentPage,this.totalPage)
+        this.rtPageArr(this.currentPage, this.totalPage)
       },
-      current(newVal,oldVal){
+      current (newVal, oldVal) {
         this.currentPage = newVal
-        this.rtPageArr(this.currentPage,this.totalPage)
+        this.rtPageArr(this.currentPage, this.totalPage)
       }
     },
     methods: {
       /**
        * 分页数组
        */
-      rtPageArr(pageindex,allpage){
-        var page = [];
+      rtPageArr (pageindex, allpage) {
+        var page = [], i
         if (allpage <= 10) {
-          for (var i = 1; i <= allpage; i++) {
+          for (i = 1; i <= allpage; i++) {
             page.push(i)
           }
         } else {
           if (pageindex <= 4) {
-            for (var i = 1; i <= 5; i++) {
+            for (i = 1; i <= 5; i++) {
               page[page.length] = i
             }
-            if (!this.simple && !this.showTotal){
-              page.push('...');
-              page[page.length] = allpage;
+            if (!this.simple && !this.showTotal) {
+              page.push('...')
+              page[page.length] = allpage
             }
           } else if (pageindex >= allpage - 3) {
-            if (!this.simple && !this.showTotal){
-              page.push(1);
-              page.push('...');
+            if (!this.simple && !this.showTotal) {
+              page.push(1)
+              page.push('...')
             }
-            for (var i = allpage - 4; i <= allpage; i++) {
-              page.push(i);
+            for (i = allpage - 4; i <= allpage; i++) {
+              page.push(i)
             }
           } else {
-            if (!this.simple && !this.showTotal){
-              page.push(1);
-              page.push('...');
+            if (!this.simple && !this.showTotal) {
+              page.push(1)
+              page.push('...')
             }
-            for (var i = pageindex - 2; i <= pageindex + 2; i++) {
-              page.push(i);
+            for (i = pageindex - 2; i <= pageindex + 2; i++) {
+              page.push(i)
             }
-            if (!this.simple && !this.showTotal){
-              page.push('...');
+            if (!this.simple && !this.showTotal) {
+              page.push('...')
               page.push(allpage)
             }
           }
         }
-        this.pageArr = [];
-        this.pageArr = page;
+        this.pageArr = []
+        this.pageArr = page
       },
       /**
        * 点击分页
        */
-      ckPages(itemPage,index){
-        if (itemPage != '...') {
-          this.currentPage = itemPage;
-          this.rtPageArr(this.currentPage,this.totalPage);
-        }else{
+      ckPages (itemPage, index) {
+        if (itemPage !== '...') {
+          this.currentPage = itemPage
+          this.rtPageArr(this.currentPage, this.totalPage)
+        } else {
           /**
            * 五页计算
            */
           if (this.showElevator) {
-            this.currentPage = index == 1 ? (this.currentPage - 5) : (this.currentPage + 5);
-          }else{
-            if (index == 1) {
-              this.currentPage = 1;
-            }else{
-              this.currentPage = this.totalPage;
+            this.currentPage = index === 1 ? (this.currentPage - 5) : (this.currentPage + 5)
+          } else {
+            if (index === 1) {
+              this.currentPage = 1
+            } else {
+              this.currentPage = this.totalPage
             }
           }
           /**
            * 前五页计算为0默认第一页
            */
           if (!this.currentPage) {
-            this.currentPage = 1;
+            this.currentPage = 1
           }
           /**
            * 后五页计算当前页大于总页数默认最后一页
            */
           if (this.currentPage > this.totalPage) {
-            this.currentPage = this.totalPage;
+            this.currentPage = this.totalPage
           }
-          this.rtPageArr(this.currentPage,this.totalPage);
+          this.rtPageArr(this.currentPage, this.totalPage)
         }
-        this.$emit('page',{
-          current:this.currentPage
+        this.$emit('page', {
+          current: this.currentPage
         })
       },
       /**
        * 上一页
        */
-      previousPage:function() {
-        if (this.currentPage == 1) return;
-        this.currentPage = this.currentPage - 1;
-        this.rtPageArr(this.currentPage,this.totalPage);
-        this.$emit('page',{
-          current:this.currentPage
+      previousPage: function () {
+        if (this.currentPage === 1) return
+        this.currentPage = this.currentPage - 1
+        this.rtPageArr(this.currentPage, this.totalPage)
+        this.$emit('page', {
+          current: this.currentPage
         })
       },
       /**
        * 下一页
        */
-      nextPage:function() {
-        if (this.currentPage == this.totalPage) return;
-        this.currentPage = this.currentPage + 1;
-        this.rtPageArr(this.currentPage,this.totalPage);
-        this.$emit('page',{
-          current:this.currentPage
+      nextPage: function () {
+        if (this.currentPage === this.totalPage) return
+        this.currentPage = this.currentPage + 1
+        this.rtPageArr(this.currentPage, this.totalPage)
+        this.$emit('page', {
+          current: this.currentPage
         })
       },
       keyDown (e) {
-          const key = e.keyCode;
-          const condition = (key >= 48 && key <= 57) || (key >= 96 && key <= 105) || key == 8 || key == 37 || key == 39;
-          if (!condition) {
-              e.preventDefault();
-          }
+        const key = e.keyCode
+        const condition = (key >= 48 && key <= 57) || (key >= 96 && key <= 105) || key === 8 || key === 37 || key === 39
+        if (!condition) {
+          e.preventDefault()
+        }
       },
       keyUp (e) {
-        const key = e.keyCode;
-        const val = parseInt(e.target.value);
-        if (key == 13) {
-          let page = 1;
+        const key = e.keyCode
+        const val = parseInt(e.target.value)
+        if (key === 13) {
+          let page = 1
           if (val > this.totalPage) {
-              page = this.totalPage;
+            page = this.totalPage
           } else if (val <= 0) {
-              page = 1;
+            page = 1
           } else {
-              page = val;
+            page = val
           }
-          this.currentPage = page;
-          this.rtPageArr(this.currentPage,this.totalPage);
-          this.$emit('page',{
-            current:this.currentPage
+          this.currentPage = page
+          this.rtPageArr(this.currentPage, this.totalPage)
+          this.$emit('page', {
+            current: this.currentPage
           })
         }
       }
     },
-    mounted(){
-      this.rtPageArr(this.currentPage,this.totalPage);
-      if (JSON.stringify(this.i18n) == '{}') {
-        this.i18np = {jump:'跳至',page:'页',total:'总页数',prev:'上一页',next:'下一页'}
-      }else{
-        this.i18np = this.i18n;
-      }
+    mounted () {
+      this.rtPageArr(this.currentPage, this.totalPage)
     }
   }
 </script>
