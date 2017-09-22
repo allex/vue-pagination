@@ -7,8 +7,10 @@
 .npmignore
 .editorconfig
 .eslintrc*
-.stylelintrc
-.build/
+.build
+.config
+.env
+.gitlab-ci.*
 t.*
 [a-z0-9].*
 *.log
@@ -21,4 +23,5 @@ test
 coverage
 karma.conf.js
 webpack.config.js
+rollup.config.js
 src
