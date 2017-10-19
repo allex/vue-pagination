@@ -274,6 +274,9 @@
           }
           this.currentPage = page
           this.rtPageArr(this.currentPage, this.totalPage)
+          if(isNaN(this.currentPage)){
+            return
+          }
           this.$emit('page', {
             current: this.currentPage
           })
