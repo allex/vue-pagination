@@ -7,7 +7,7 @@
  *   Allex Wang <allex.wxn@gmail.com> (http://iallex.com/)
  */
 
-'use stric'
+'use strict'
 
 const path = require('path')
 const merge = require('webpack-merge')
@@ -35,17 +35,25 @@ function $external (module, root) {
 }
 
 // Normalize fss configrations
-const fssConfig = pkg.fss
-if (fssConfig) {
-  if (!fssConfig.publicPath) {
+const fssConfig = pkg.fss || {}
+if (!fssConfig.publicPath) {
     let cdnPrefix = fssConfig.cdnPrefix
     if (!cdnPrefix) {
       throw new Error('FSS cdn prefix not found.')
     }
     cdnPrefix = cdnPrefix.replace(/\/+$/, '')
     fssConfig.publicPath = `${cdnPrefix}/${pkg.name}@${pkg.version}`
-  }
 }
+
+Object.defineProperty(fssConfig, 'init', {
+  writable: false,
+  configurable: false,
+  enumerable: false,
+  value: function (cfg) {
+    Object.assign(cfg.externals || (cfg.externals = {}),
+      $external(fssConfig.externals))
+  }
+})
 
 const webpackBase = {
   module: {
@@ -88,25 +96,25 @@ const webpackBase = {
       '@': resolve('src'),
       'src': resolve('src'),
       'vue': 'vue/dist/vue.esm.js'
-    }
+    },
+    extensions: [".js", ".json", ".vue", ".jsx"]
   },
   plugins: [
     new ProgressPlugin()
   ],
   externals: $external({
     'jquery': '$',
-    'jquery-mousewheel': '$',
     'react': 'React',
     'vue': 'Vue',
-    'lodash': '_',
-    '@vue/utils': 'VueUtils',
-    '@fedor/utils': '__'
+    'lodash': '_'
   }),
   devtool: false,
   performance: {
     hints: 'warning'
   }
 }
+
+fssConfig.init(webpackBase)
 
 // make webpack config extendable.
 ;(function extendable (o) {

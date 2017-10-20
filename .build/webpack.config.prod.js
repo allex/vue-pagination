@@ -145,7 +145,7 @@ const entries = createOutputList(fssConfig.distname, fssConfig.library).map(func
 })
 
 !function(demo) {
-  demo.devtool = 'source-map',
+  demo.devtool = 'source-map'
   entries.push(demo)
 }(require('./webpack.config.dev'))
 
