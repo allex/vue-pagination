@@ -100,7 +100,7 @@ const webpackBase = {
     'vue': 'Vue',
     'lodash': '_',
     '@vue/utils': 'VueUtils',
-    '@fedor/v-utils': '___'
+    '@fedor/utils': '__'
   }),
   devtool: false,
   performance: {

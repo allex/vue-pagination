@@ -53,7 +53,8 @@
     "start": "npm run dev"
   },
   "maintainers": [
-    { "name": "allex", "email": "allex.wxn@gmail.com" }
+    { "name": "allex", "email": "allex.wxn@gmail.com" },
+    { "name": "tangwei", "email": "tangwei@ananlysys.com.cn" }
   ],
   "fss": {
     "distname": "index",
