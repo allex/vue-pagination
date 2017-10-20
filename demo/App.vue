@@ -2,7 +2,7 @@
   <div>
     <v-page :total="total" :current="current" show-elevator @page="page" :i18n="{jump:'Jump',page:'Page',total:'PageCount',prev:'Prev',next:'Next'}"></v-page>
     <br />
-    <br />
+    <br />  
     <br />
     <v-page :total="23" :current="6" show-sizer></v-page>
     <br />
