@@ -69,7 +69,8 @@
     {
       "name": "tangwei",
       "email": "tangwei@ananlysys.com.cn"
-    }
+    },
+    { "name": "robin", "email": "zhoubiao@analysys.com.cn" }
   ],
   "standard": {
     "ignore": [
