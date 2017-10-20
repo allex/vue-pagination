@@ -2,6 +2,6 @@
 
 import vPage from './Page.vue'
 
-export default vPage
+vPage.vPagination = vPage
 
-export { vPage as vPagination }
+export default vPage

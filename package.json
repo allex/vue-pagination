@@ -17,7 +17,6 @@
     "dev": "npm run lint:fix && cross-env NODE_ENV=development webpack-dev-server --config ./.build/webpack.config.dev.js --hot",
     "lint": "standard \"**/*.{js,vue}\"",
     "lint:fix": "standard \"**/*.{js,vue}\" --fix",
-    "publish": "npm run build",
     "prepublishOnly": "npm run build",
     "start": "npm run dev",
     "test": "npm run lint"
@@ -70,7 +69,10 @@
       "name": "tangwei",
       "email": "tangwei@ananlysys.com.cn"
     },
-    { "name": "robin", "email": "zhoubiao@analysys.com.cn" }
+    {
+      "name": "robin",
+      "email": "zhoubiao@analysys.com.cn"
+    }
   ],
   "standard": {
     "ignore": [
