@@ -8,7 +8,7 @@
     <br />
     <br />
     <br />
-    <v-page :total="22" :current="1" show-total></v-page>
+    <v-page :total="22" :current="1" show-total></v-page>  
     <br />
     <br />
     <br />
