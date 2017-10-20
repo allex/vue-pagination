@@ -25,10 +25,10 @@
       <label>
         <input
           type="text"
-          name=""
-          :value="currentPage"
+          name="page"
           @keydown="keyDown"
           @keyup="keyUp"
+          v-model="inputValue"
           @change="keyUp">
       </label>
     </li>
@@ -61,9 +61,9 @@
       <label>
         <input
           type="text"
-          name=""
-          :value="currentPage"
+          name="page"
           @keydown="keyDown"
+          v-model="inputValue"
           @keyup="keyUp"
           @change="keyUp">
       </label>
@@ -81,7 +81,8 @@
       return {
         pageArr: [],
         currentPage: this.current,
-        totalPage: this.total
+        totalPage: this.total,
+        inputValue: ''
       }
     },
     props: {
@@ -147,6 +148,11 @@
       current (newVal, oldVal) {
         this.currentPage = newVal
         this.rtPageArr(this.currentPage, this.totalPage)
+      },
+      inputValue (newVal) {
+        if (!this.isNumber(newVal)) {
+          this.inputValue = ''
+        }
       }
     },
     methods: {
@@ -253,16 +259,24 @@
           current: this.currentPage
         })
       },
+      isNumber (num) {
+        return !isNaN(Number(num))
+      },
       keyDown (e) {
-        const key = e.keyCode
+        const key = e.keyCode || e.which || e.charCode
         const condition = (key >= 48 && key <= 57) || (key >= 96 && key <= 105) || key === 8 || key === 37 || key === 39
         if (!condition) {
           e.preventDefault()
         }
       },
       keyUp (e) {
-        const key = e.keyCode
+        const key = e.keyCode || e.which || e.charCode
         const val = parseInt(e.target.value)
+        if (isNaN(val)) {
+          this.inputValue = ''
+          e.preventDefault()
+          return
+        }
         if (key === 13) {
           let page = 1
           if (val > this.totalPage) {
@@ -274,9 +288,6 @@
           }
           this.currentPage = page
           this.rtPageArr(this.currentPage, this.totalPage)
-          if (isNaN(this.currentPage)) {
-            return
-          }
           this.$emit('page', {
             current: this.currentPage
           })
