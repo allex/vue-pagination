@@ -82,7 +82,7 @@
         pageArr: [],
         currentPage: this.current,
         totalPage: this.total,
-        inputValue:''
+        inputValue: ''
       }
     },
     props: {
@@ -150,7 +150,7 @@
         this.rtPageArr(this.currentPage, this.totalPage)
       },
       inputValue (newVal) {
-        if(!this.isNumber(newVal)){
+        if (!this.isNumber(newVal)) {
           this.inputValue = ''
         }
       }
@@ -272,7 +272,7 @@
       keyUp (e) {
         const key = e.keyCode || e.which || e.charCode
         const val = parseInt(e.target.value)
-        if(isNaN(val)){
+        if (isNaN(val)) {
           this.inputValue = ''
           e.preventDefault()
           return
