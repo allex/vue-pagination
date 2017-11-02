@@ -86,6 +86,9 @@
       }
     },
     props: {
+      /**
+       * 国际化 默认中文
+       */
       i18n: {
         type: Object,
         default () {
@@ -98,14 +101,21 @@
           }
         }
       },
+      /**
+       * 数据总数 
+       */
       total: {
         type: Number
       },
+      /**
+       * 当前页码
+       */
       current: {
         type: Number,
         default: 1
       },
       /**
+       * 简洁版 （小的）
        */
       simple: {
         type: Boolean,
@@ -258,9 +268,15 @@
           current: this.currentPage
         })
       },
+      /**
+       * 数字
+       */
       isNumber (num) {
         return !isNaN(Number(num))
       },
+      /**
+       * events
+       */
       keyDown (e) {
         const key = e.keyCode || e.which || e.charCode
         const condition = (key >= 48 && key <= 57) || (key >= 96 && key <= 105) || key === 8 || key === 37 || key === 39
@@ -268,6 +284,9 @@
           e.preventDefault()
         }
       },
+      /**
+       * events
+       */
       keyUp (e) {
         const key = e.keyCode || e.which || e.charCode
         const val = parseInt(e.target.value)
@@ -294,6 +313,9 @@
       }
     },
     mounted () {
+      /**
+       * init
+       */
       this.rtPageArr(this.currentPage, this.totalPage)
     }
   }
