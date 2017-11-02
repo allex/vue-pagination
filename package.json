@@ -1,6 +1,6 @@
 {
   "name": "@vue/pagination",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A pagination based on VUE.",
   "keywords": [
     "pagination",
@@ -17,7 +17,7 @@
     "dev": "npm run lint:fix && cross-env NODE_ENV=development webpack-dev-server --config ./.build/webpack.config.dev.js --hot",
     "lint": "standard \"**/*.{js,vue}\"",
     "lint:fix": "standard \"**/*.{js,vue}\" --fix",
-    "publish": "npm run build",
+    "prepublish": "npm run build",
     "start": "npm run dev",
     "test": "npm run lint"
   },
