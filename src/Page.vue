@@ -106,7 +106,6 @@
         default: 1
       },
       /**
-       * 小
        */
       simple: {
         type: Boolean,
