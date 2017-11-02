@@ -75,6 +75,8 @@
 </template>
 
 <script>
+  const isNumber = (n) => !isNaN(Number(n))
+  
   export default {
     name: 'Page',
     data () {
@@ -115,7 +117,7 @@
         default: 1
       },
       /**
-       * 简洁版 （小的）
+       * 简洁版分页样式
        */
       simple: {
         type: Boolean,
@@ -159,7 +161,7 @@
         this.rtPageArr(this.currentPage, this.totalPage)
       },
       inputValue (newVal) {
-        if (!this.isNumber(newVal)) {
+        if (!isNumber(newVal)) {
           this.inputValue = ''
         }
       }
@@ -209,16 +211,14 @@
         this.pageArr = page
       },
       /**
-       * 点击分页
+       * 页码点击分页事件处理
        */
       ckPages (itemPage, index) {
         if (itemPage !== '...') {
           this.currentPage = itemPage
           this.rtPageArr(this.currentPage, this.totalPage)
         } else {
-          /**
-           * 五页计算
-           */
+          // 五页计算
           if (this.showElevator) {
             this.currentPage = index === 1 ? (this.currentPage - 5) : (this.currentPage + 5)
           } else {
@@ -228,15 +228,11 @@
               this.currentPage = this.totalPage
             }
           }
-          /**
-           * 前五页计算为0默认第一页
-           */
+          // 前五页计算为0默认第一页
           if (!this.currentPage) {
             this.currentPage = 1
           }
-          /**
-           * 后五页计算当前页大于总页数默认最后一页
-           */
+          // 后五页计算当前页大于总页数默认最后一页
           if (this.currentPage > this.totalPage) {
             this.currentPage = this.totalPage
           }
@@ -269,13 +265,7 @@
         })
       },
       /**
-       * 数字
-       */
-      isNumber (num) {
-        return !isNaN(Number(num))
-      },
-      /**
-       * events
+       * Event handler for keyDown
        */
       keyDown (e) {
         const key = e.keyCode || e.which || e.charCode
@@ -285,7 +275,7 @@
         }
       },
       /**
-       * events
+       * Event handler for keyUp
        */
       keyUp (e) {
         const key = e.keyCode || e.which || e.charCode
@@ -313,9 +303,6 @@
       }
     },
     mounted () {
-      /**
-       * init
-       */
       this.rtPageArr(this.currentPage, this.totalPage)
     }
   }
@@ -484,5 +471,4 @@
       }
     }
   }
-
 </style>

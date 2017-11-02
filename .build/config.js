@@ -12,38 +12,8 @@
 const path = require('path')
 const merge = require('webpack-merge')
 const ProgressPlugin = require('@fedor/progress-webpack-plugin')
-const pkg = require('../package.json')
 
-const resolve = function(dir) {
-  return path.resolve(__dirname, '..', dir)
-}
-
-function $external (module, root) {
-  if (typeof module === 'string') {
-    return {
-      var: root,
-      root: root,
-      commonjs: module,
-      commonjs2: module,
-      amd: module
-    }
-  }
-  return Object.keys(module).reduce((o, k) => {
-    o[k] = $external(k, module[k])
-    return o
-  }, {})
-}
-
-// Normalize fss configrations
-const fssConfig = pkg.fss || {}
-if (!fssConfig.publicPath) {
-    let cdnPrefix = fssConfig.cdnPrefix
-    if (!cdnPrefix) {
-      throw new Error('FSS cdn prefix not found.')
-    }
-    cdnPrefix = cdnPrefix.replace(/\/+$/, '')
-    fssConfig.publicPath = `${cdnPrefix}/${pkg.name}@${pkg.version}`
-}
+const { config: fssConfig } = require('@fedor/fss-config').sync()
 
 Object.defineProperty(fssConfig, 'init', {
   writable: false,
@@ -54,6 +24,17 @@ Object.defineProperty(fssConfig, 'init', {
       $external(fssConfig.externals))
   }
 })
+
+const resolve = function (dir) {
+  return path.resolve(__dirname, '..', dir)
+}
+
+function $external (module, root) {
+  if (typeof module === 'string') {
+    return { var: root, root: root, commonjs: module, commonjs2: module, amd: module }
+    }
+  return Object.keys(module).reduce((o, k) => (o[k] = $external(k, module[k]), o), {}) // eslint-disable-line no-sequences
+}
 
 const webpackBase = {
   module: {
@@ -97,7 +78,7 @@ const webpackBase = {
       'src': resolve('src'),
       'vue': 'vue/dist/vue.esm.js'
     },
-    extensions: [".js", ".json", ".vue", ".jsx"]
+    extensions: ['.js', '.json', '.vue', '.jsx']
   },
   plugins: [
     new ProgressPlugin()

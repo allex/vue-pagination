@@ -18,7 +18,7 @@ const { webpackBase, fssConfig } = require('./config')
 const genVueLoadOptions = function (option) {
   // vue load config goes here
   const o = {}
-  if(!option.bundle){
+  if (!option.bundle) {
     o.extractCSS = true
   }
   return o
@@ -28,13 +28,13 @@ const genInnerCssLoader = function (option) {
   const cssLoader = {
     loader: 'css-loader'
   }
-  if (option.minimize){
+  if (option.minimize) {
     cssLoader.options = { minimize: true }
   }
   return cssLoader
 }
 
-const genCssLoader = function(option) {
+const genCssLoader = function (option) {
   const cssLoader = genInnerCssLoader(option)
   let config = ['style-loader', cssLoader]
   if (!option.bundle) {
@@ -106,15 +106,21 @@ const genWebpackCfg = function (filename, library, option) {
     config.plugins.push(
       new UglifyJSPlugin({
         parallel: true,
-        sourceMap: true,
-        comments: function (n, c) {
-          /*
-          IMPORTANT: Please preserve 3rd-party library license info,
-          inspired from @allex/amd-build-worker/config/util.js
-          */
-          var text = c.value, type = c.type;
-          if (type == 'comment2') {
-            return /^!|@preserve|@license|@cc_on|MIT/i.test(text)
+        sourceMap: false,
+        uglifyOptions: {
+          compress: {
+            drop_console: true,
+            drop_debugger: true
+          },
+          comments: function (n, c) {
+            /*
+            IMPORTANT: Please preserve 3rd-party library license info,
+            inspired from @allex/amd-build-worker/config/util.js
+            */
+            var text = c.value, type = c.type
+            if (type == 'comment2') {
+              return /^!|@preserve|@license|@cc_on|MIT/i.test(text)
+            }
           }
         }
       })

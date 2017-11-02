@@ -28,15 +28,6 @@ module.exports = webpackBase.extend({
       , { test: /\.vue$/, loader: 'vue-loader' }
     ]
   },
-  devServer: {
-    open: true,
-    openPage: 'demo/',
-    contentBase: resolve('.'),
-    publicPath: '/demo',
-    compress: true,
-    port: getEnv('DEV_PORT', 9000),
-    noInfo: false
-  },
   devtool: '#cheap-source-map',
   plugins: [
     new webpack.DefinePlugin({
@@ -48,7 +39,18 @@ module.exports = webpackBase.extend({
       inject: false,
       template: 'demo/index.html'
     })
-  ]
+  ],
+  devServer: {
+    // see also: <https://webpack.js.org/configuration/dev-server/>
+    open: true,
+    openPage: 'demo/',
+    contentBase: resolve('.'),
+    publicPath: '/demo',
+    compress: true,
+    port: getEnv('DEV_PORT', 9000),
+    host: getEnv('DEV_HOST', 'localhost'),
+    noInfo: false
+  }
 })
 
 // vim: set ft=javascript fdm=marker et ff=unix tw=80 sw=2:

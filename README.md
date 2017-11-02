@@ -29,10 +29,17 @@ import { vPagination } from '@vue/pagination'
 
 #### props
 
-- `i-1-8n` ***Object*** (*optional*) `default: [object Object]`
+- `i18n` ***Object*** (*optional*) `default: [object Object]`
+国际化 默认中文
+
 - `total` ***Number*** (*optional*)
+数据总数
+
 - `current` ***Number*** (*optional*) `default: 1`
+当前页码
+
 - `simple` ***Boolean*** (*optional*) `default: false`
+简洁版分页样式
 
 - `show-sizer` ***Boolean*** (*optional*) `default: false`
 带页数点击...最后五页
@@ -46,24 +53,6 @@ import { vPagination } from '@vue/pagination'
 #### events
 
 - `page` undefined
-
-#### methods
-
-- `rtPageArr(pageindex, allpage)`
-分页数组
-
-- `ckPages(itemPage, index)`
-点击分页
-
-- `previousPage()`
-上一页
-
-- `nextPage()`
-下一页
-
-- `isNumber(num)`
-- `keyDown(e)`
-- `keyUp(e)`
 
 ## Example
 
