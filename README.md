@@ -4,10 +4,6 @@ A pagination based on VUE
 
 ## Installation
 
-## Module Exposes
-
-## Installation
-
 NPM:
 
 ```sh
@@ -29,6 +25,46 @@ Combo:
 import { vPagination } from '@vue/pagination'
 ```
 
+### vPage
+
+#### props
+
+- `i-1-8n` ***Object*** (*optional*) `default: [object Object]`
+- `total` ***Number*** (*optional*)
+- `current` ***Number*** (*optional*) `default: 1`
+- `simple` ***Boolean*** (*optional*) `default: false`
+
+- `show-sizer` ***Boolean*** (*optional*) `default: false`
+带页数点击...最后五页
+
+- `show-total` ***Boolean*** (*optional*) `default: false`
+总数
+
+- `show-elevator` ***Boolean*** (*optional*) `default: false`
+已当前页计算前/后五页
+
+#### events
+
+- `page` undefined
+
+#### methods
+
+- `rtPageArr(pageindex, allpage)`
+分页数组
+
+- `ckPages(itemPage, index)`
+点击分页
+
+- `previousPage()`
+上一页
+
+- `nextPage()`
+下一页
+
+- `isNumber(num)`
+- `keyDown(e)`
+- `keyUp(e)`
+
 ## Example
 
 ```html
@@ -40,7 +76,6 @@ import { vPagination } from '@vue/pagination'
 
 <script>
   import { vPagination as vPage } from '@vue/pagination'
-
   export default {
     data: function () {
       return {
