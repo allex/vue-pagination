@@ -104,7 +104,7 @@
         }
       },
       /**
-       * 数据总数 
+       * 数据总数
        */
       total: {
         type: Number
@@ -401,6 +401,7 @@
         font-size:$font-primary-size;
         color:$font-primary-color;
         text-align: center;
+        background:none
       }
     }
   }
