@@ -1,6 +1,6 @@
 {
   "name": "@vue/pagination",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A pagination based on VUE.",
   "keywords": [
     "pagination",

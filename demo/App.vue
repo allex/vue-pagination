@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-page :total="total" :current="current" show-elevator @page="page" :i18n="{jump:'Jump',page:'Page',total:'PageCount',prev:'Prev',next:'Next'}"></v-page>
+    <v-page :total="total" :current="current" show-elevator @page="page" :i18n="{jump:'Jump',page:'Page',total:'PageCount',prev:'Prev',next:'Next',totalNumber:'Total number'}"></v-page>
     <br />
     <br />  
     <br />
@@ -8,7 +8,7 @@
     <br />
     <br />
     <br />
-    <v-page :total="22" :current="1" show-total></v-page>  
+    <v-page :total="22" :current="1" show-total :totalNumber="300"></v-page>  
     <br />
     <br />
     <br />
@@ -20,7 +20,7 @@
     <br />
     <br />
     <br />
-    <v-page :total="22" :current="1" simple show-sizer :i18n="{jump:'Jump',page:'Page',total:'PageCount',prev:'Prev',next:'Next'}"></v-page>
+    <v-page :total="22" :current="1" simple show-sizer :i18n="{jump:'Jump',page:'Page',total:'PageCount',prev:'Prev',next:'Next',totalNumber:'Total number'}"></v-page>
     <br />
     <br />
     <br />
