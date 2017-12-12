@@ -1,7 +1,8 @@
 <template>
   <ul class="v-page" v-if="!simple">
     <li class="v-page-item v-page-text">
-      <span>{{i18n.total + ' / ' + totalPage}}</span>
+      <span v-if="!totalNumber">{{i18n.total + ' / ' + totalPage}}</span>
+      <span v-if="totalNumber">{{i18n.totalNumber + ' / ' + totalNumber}}</span>
     </li>
     <li class="v-page-item v-page-prev" @click="previousPage()" :class="currentPage == 1 ? 'v-page-disabled' : ''" :title="i18n.prev">
       <a><i class="fa fa-angle-left"></i></a>
@@ -98,6 +99,7 @@
             jump: '跳至',
             page: '页',
             total: '总页数',
+            totalNumber: '总条数',
             prev: '上一页',
             next: '下一页'
           }
@@ -136,6 +138,13 @@
       showTotal: {
         type: Boolean,
         default: false
+      },
+      /**
+       * 总（条）数
+       */
+      totalNumber: {
+        type: [String, Number],
+        default: null
       },
       /**
        * 已当前页计算前/后五页
